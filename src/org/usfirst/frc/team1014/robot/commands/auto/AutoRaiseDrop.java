@@ -29,12 +29,12 @@ public class AutoRaiseDrop extends Command {
 	}
 
 	protected void execute() {
-		lifter.move(direction);
+		lifter.move(direction, false);
 		currentTime_us = RobotController.getFPGATime();
 	}
 
 	protected void end() {
-		lifter.move(0);
+		lifter.move(0, false);
 	}
 
 	@Override

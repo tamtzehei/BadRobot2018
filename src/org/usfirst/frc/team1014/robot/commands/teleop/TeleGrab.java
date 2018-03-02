@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1014.robot.commands.teleop;
 
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
+import org.usfirst.frc.team1014.robot.subsystems.Lifter;
 import org.usfirst.frc.team1014.robot.util.LogUtil;
 
 import badlog.lib.BadLog;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TeleGrab extends Command {
 	private XboxController controller;
 	private Grabber grabber;
+	private Lifter lifter;
 
 	boolean grabState = false, grabDown = false;
 	long startLastGrab = 0;
@@ -58,16 +60,31 @@ public class TeleGrab extends Command {
 		}
 
 		BadLog.publish("Grabber/Heartbeat", LogUtil.fromBool(grabState));
+
+		{
+			double speed = (controller.getBumper(Hand.kLeft) ? 1 : 0)
+					- (controller.getTriggerAxis(Hand.kLeft) > .5 ? 1 : 0);
+			boolean overrideLimits = false;
+			
+			if(Math.abs(controller.getY(Hand.kRight)) > .05) {
+				speed = -controller.getY(Hand.kRight);
+				overrideLimits = true;
+			}
+			
+			lifter.move(speed, overrideLimits);
+		}
 	}
 
 	private boolean isGrabbing() {
 		return (System.currentTimeMillis() - startLastGrab) % 1000 < 250;
 	}
 
-	public TeleGrab(XboxController controller, Grabber grabber) {
+	public TeleGrab(XboxController controller, Grabber grabber, Lifter lifter) {
 		requires(grabber);
+		requires(lifter);
 		this.controller = controller;
 		this.grabber = grabber;
+		this.lifter = lifter;
 
 		BadLog.createTopicSubscriber("Grabber/Heartbeat", "bool", DataInferMode.DEFAULT);
 	}

@@ -29,12 +29,12 @@ public class AutoRaiseSwitch extends Command {
 	}
 
 	protected void execute() {
-		lifter.move(direction * 1);
+		lifter.move(direction * 1, false);
 		currentTime_us = RobotController.getFPGATime();
 	}
 
 	protected void end() {
-		lifter.move(0);
+		lifter.move(0, false);
 
 	}
 

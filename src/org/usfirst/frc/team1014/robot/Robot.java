@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
 		if (DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R') {
 			autoCG.addSequential(new AutoRLScale(driveTrain, lifter, grabber, 1));
 		} else {
-			autoCG.addSequential(new DriveStraightDistance(driveTrain, 80));
+			autoCG.addSequential(new DriveStraightDistance(driveTrain, 120));
 		}
 
 		// autoCG.addSequential(new AutoDelay((int) SmartDashboard.getNumber("Delay",

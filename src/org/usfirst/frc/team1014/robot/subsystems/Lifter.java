@@ -23,9 +23,9 @@ public class Lifter extends Subsystem {
 		BadLog.createTopic("Lift/Lifter Voltage", "V", () -> liftMotor.getMotorOutputVoltage());
 	}
 
-	public void move(double speed) {
+	public void move(double speed, boolean overrideLimits) {
+		liftMotor.overrideLimitSwitchesEnable(!overrideLimits);
 		liftMotor.set(ControlMode.PercentOutput, speed);
-
 	}
 
 	@Override
