@@ -60,6 +60,10 @@ public class Drivetrain extends Subsystem {
 
 		BadLog.createTopic("Drivetrain/Angle", "deg", () -> getAngleCCW());
 
+		BadLog.createTopic("Drivetrain/Accel X", "m/s^2", () -> (double) ahrs.getWorldLinearAccelX());
+		BadLog.createTopic("Drivetrain/Accel Y", "m/s^2", () -> (double) ahrs.getWorldLinearAccelY());
+		BadLog.createTopic("Drivetrain/Accel Z", "m/s^2", () -> (double) ahrs.getWorldLinearAccelZ());
+
 		targetAngle = 0;
 		miniPID = new MiniPID(.05, .001, .20);
 		miniPID.setOutputLimits(.5);
