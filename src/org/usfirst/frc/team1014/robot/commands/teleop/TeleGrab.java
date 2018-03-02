@@ -16,7 +16,7 @@ public class TeleGrab extends Command {
 	private Grabber grabber;
 	private Lifter lifter;
 
-	boolean grabState = false, grabDown = false;
+	boolean heartbeatState = false, heartbeatDown = false;
 	long startLastGrab = 0;
 
 	@Override
@@ -31,13 +31,13 @@ public class TeleGrab extends Command {
 		if (controller.getTriggerAxis(Hand.kRight) > .3) {
 			// Collect cubes
 			grabber.turnCollect(1);
-			grabState = false;
+			heartbeatState = false;
 		} else if (controller.getBumper(Hand.kRight)) {
 			// release
 			grabber.turnRelease(.6);
-			grabState = false;
+			heartbeatState = false;
 		} else {
-			if (grabState) {
+			if (heartbeatState) {
 				grabber.turnCollect(isGrabbing() ? .2 : 0);
 				controller.setRumble(RumbleType.kLeftRumble, isGrabbing() ? 1 : 0);
 				controller.setRumble(RumbleType.kRightRumble, isGrabbing() ? 1 : 0);
@@ -50,16 +50,16 @@ public class TeleGrab extends Command {
 		}
 
 		if (controller.getAButton()) {
-			if (!grabDown) {
-				grabDown = true;
-				grabState = !grabState;
+			if (!heartbeatDown) {
+				heartbeatDown = true;
+				heartbeatState = !heartbeatState;
 				startLastGrab = System.currentTimeMillis();
 			}
 		} else {
-			grabDown = false;
+			heartbeatDown = false;
 		}
 
-		BadLog.publish("Grabber/Heartbeat", LogUtil.fromBool(grabState));
+		BadLog.publish("Grabber/Heartbeat", LogUtil.fromBool(heartbeatState));
 
 		{
 			double speed = (controller.getBumper(Hand.kLeft) ? 1 : 0)
