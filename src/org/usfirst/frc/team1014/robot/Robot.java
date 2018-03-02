@@ -15,6 +15,7 @@ import org.usfirst.frc.team1014.robot.util.LogUtil;
 
 import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -84,6 +85,8 @@ public class Robot extends TimedRobot {
 
 			SmartDashboard.putNumber("Delay", 0);
 			SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
+
+			CameraServer.getInstance().startAutomaticCapture();
 		}
 		logger.finishInitialization();
 	}
