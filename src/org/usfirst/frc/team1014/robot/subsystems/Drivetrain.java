@@ -102,26 +102,24 @@ public class Drivetrain extends Subsystem {
 	public double getTargetAngle() {
 		return targetAngle;
 	}
-	
+
 	/**
 	 * 
 	 * @return 1 for right, -1 for left
 	 */
-	public int getSwitchSide()
-	{
-		
-		if(DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R')
+	public int getSwitchSide() {
+
+		if (DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R')
 			return 1;
 		return -1;
 	}
-	
+
 	/**
 	 * 
 	 * @return 1 for right, -1 for left
 	 */
-	public int getScaleSide()
-	{
-		if(DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R')
+	public int getScaleSide() {
+		if (DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R')
 
 			return 1;
 		return -1;

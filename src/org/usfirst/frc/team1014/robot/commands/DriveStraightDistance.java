@@ -11,17 +11,18 @@ public class DriveStraightDistance extends Command {
 
 	long startTime;
 
-	double linRegOffset = -2.4788;
-	double linRegScaler = 56.4918;
-	
+	double linRegOffset = -11.6;
+	double linRegScaler = 91.8;
+
 	/**
 	 * 
-	 * @param driveTrain 
-	 * @param distance - distance in inches
+	 * @param driveTrain
+	 * @param distance
+	 *            - distance in inches
 	 */
 
 	public DriveStraightDistance(Drivetrain driveTrain, double distance) {
-		this.speed = .5;
+		this.speed = .7;
 
 		// Inverse of graph from linear regression
 		this.seconds = (distance - linRegOffset) / linRegScaler;
