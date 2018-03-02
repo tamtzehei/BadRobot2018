@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1014.robot.commands.auto;
 
-import org.usfirst.frc.team1014.robot.commands.AutoRaiseScale;
-import org.usfirst.frc.team1014.robot.commands.AutoRelease;
-import org.usfirst.frc.team1014.robot.commands.DriveStraight;
+import org.usfirst.frc.team1014.robot.commands.core.DriveStraight;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
 import org.usfirst.frc.team1014.robot.subsystems.Lifter;

@@ -2,18 +2,11 @@ package org.usfirst.frc.team1014.robot;
 
 import java.util.Optional;
 
-import org.usfirst.frc.team1014.robot.commands.AutoDelay;
-import org.usfirst.frc.team1014.robot.commands.AutoRaiseSwitch;
 import org.usfirst.frc.team1014.robot.commands.Autonomous;
-import org.usfirst.frc.team1014.robot.commands.DriveStraight;
-import org.usfirst.frc.team1014.robot.commands.DriveStraightDistance;
 import org.usfirst.frc.team1014.robot.commands.Teleop;
 import org.usfirst.frc.team1014.robot.commands.auto.AutoMode;
 import org.usfirst.frc.team1014.robot.commands.auto.AutoRLScale;
-import org.usfirst.frc.team1014.robot.commands.auto.StartCenterScale;
-import org.usfirst.frc.team1014.robot.commands.auto.StartCenterSwitch;
-import org.usfirst.frc.team1014.robot.commands.auto.StartLeft;
-import org.usfirst.frc.team1014.robot.commands.auto.StartRight;
+import org.usfirst.frc.team1014.robot.commands.core.DriveStraightDistance;
 import org.usfirst.frc.team1014.robot.subsystems.Climber;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
@@ -22,7 +15,6 @@ import org.usfirst.frc.team1014.robot.util.LogUtil;
 
 import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;

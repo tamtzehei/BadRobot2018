@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1014.robot.commands;
+package org.usfirst.frc.team1014.robot.commands.teleop;
 
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
 import org.usfirst.frc.team1014.robot.util.LogUtil;
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class UseGrabber extends Command {
+public class TeleGrab extends Command {
 	private XboxController controller;
 	private Grabber grabber;
 
@@ -64,7 +64,7 @@ public class UseGrabber extends Command {
 		return (System.currentTimeMillis() - startLastGrab) % 1000 < 250;
 	}
 
-	public UseGrabber(XboxController controller, Grabber grabber) {
+	public TeleGrab(XboxController controller, Grabber grabber) {
 		requires(grabber);
 		this.controller = controller;
 		this.grabber = grabber;

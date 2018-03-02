@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1014.robot.commands.auto;
 
-import org.usfirst.frc.team1014.robot.commands.DriveStraightDistance;
+import org.usfirst.frc.team1014.robot.commands.core.DriveStraightDistance;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
 import org.usfirst.frc.team1014.robot.subsystems.Lifter;

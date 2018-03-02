@@ -1,31 +1,19 @@
-package org.usfirst.frc.team1014.robot.commands;
+package org.usfirst.frc.team1014.robot.commands.core;
 
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveStraightDistance extends Command {
+public class DriveStraight extends Command {
 	private Drivetrain driveTrain;
 	private double seconds;
 	private double speed;
 
 	long startTime;
 
-	double linRegOffset = -11.6;
-	double linRegScaler = 91.8;
-
-	/**
-	 * 
-	 * @param driveTrain
-	 * @param distance
-	 *            - distance in inches
-	 */
-
-	public DriveStraightDistance(Drivetrain driveTrain, double distance) {
-		this.speed = .7;
-
-		// Inverse of graph from linear regression
-		this.seconds = (distance - linRegOffset) / linRegScaler;
+	public DriveStraight(Drivetrain driveTrain, double speed, double seconds) {
+		this.speed = speed;
+		this.seconds = seconds;
 		requires(driveTrain);
 		this.driveTrain = driveTrain;
 	}

@@ -1,8 +1,7 @@
 package org.usfirst.frc.team1014.robot.commands.auto;
 
-import org.usfirst.frc.team1014.robot.commands.AutoRaiseSwitch;
-import org.usfirst.frc.team1014.robot.commands.DriveStraight;
-import org.usfirst.frc.team1014.robot.commands.Spin;
+import org.usfirst.frc.team1014.robot.commands.core.DriveStraight;
+import org.usfirst.frc.team1014.robot.commands.core.Spin;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
 import org.usfirst.frc.team1014.robot.subsystems.Lifter;

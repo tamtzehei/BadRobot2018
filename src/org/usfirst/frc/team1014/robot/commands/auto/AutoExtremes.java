@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1014.robot.commands.auto;
 
-import org.usfirst.frc.team1014.robot.commands.DriveStraightDistance;
-import org.usfirst.frc.team1014.robot.commands.Spin;
+import org.usfirst.frc.team1014.robot.commands.core.DriveStraightDistance;
+import org.usfirst.frc.team1014.robot.commands.core.Spin;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

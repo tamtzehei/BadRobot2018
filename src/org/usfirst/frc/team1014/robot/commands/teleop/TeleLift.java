@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1014.robot.commands;
+package org.usfirst.frc.team1014.robot.commands.teleop;
 
 import org.usfirst.frc.team1014.robot.subsystems.Lifter;
 
@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class UseLifter extends Command {
+public class TeleLift extends Command {
 
 	private XboxController controller;
 	private Lifter lifter;
@@ -25,7 +25,7 @@ public class UseLifter extends Command {
 		lifter.move(speed);
 	}
 
-	public UseLifter(XboxController controller, Lifter lifter) {
+	public TeleLift(XboxController controller, Lifter lifter) {
 		requires(lifter);
 		this.controller = controller;
 		this.lifter = lifter;
