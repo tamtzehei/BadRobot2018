@@ -14,6 +14,7 @@ import org.usfirst.frc.team1014.robot.commands.auto.StartCenterScale;
 import org.usfirst.frc.team1014.robot.commands.auto.StartCenterSwitch;
 import org.usfirst.frc.team1014.robot.commands.auto.StartLeft;
 import org.usfirst.frc.team1014.robot.commands.auto.StartRight;
+import org.usfirst.frc.team1014.robot.subsystems.Climber;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
 import org.usfirst.frc.team1014.robot.subsystems.Lifter;
@@ -33,9 +34,9 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	Drivetrain driveTrain;
-
 	Lifter lifter;
 	Grabber grabber;
+	Climber climber;
 
 	Teleop teleopCG;
 	Autonomous autoCG;
@@ -73,8 +74,9 @@ public class Robot extends TimedRobot {
 			driveTrain = new Drivetrain();
 			grabber = new Grabber();
 			lifter = new Lifter();
+			climber = new Climber();
 
-			teleopCG = new Teleop(driveTrain, grabber, lifter);
+			teleopCG = new Teleop(driveTrain, grabber, lifter, climber);
 			autoCG = new Autonomous(driveTrain, lifter, grabber);
 
 			autoChooser = new SendableChooser();

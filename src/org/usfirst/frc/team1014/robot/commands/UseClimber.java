@@ -3,27 +3,25 @@ package org.usfirst.frc.team1014.robot.commands;
 import org.usfirst.frc.team1014.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class UseClimber extends Command{
+public class UseClimber extends Command {
 
 	Climber climber;
 	XboxController controller;
-	
-	public UseClimber(Climber climber, XboxController controller) {
+
+	public UseClimber(XboxController controller, Climber climber) {
 		this.climber = climber;
 		this.controller = controller;
 	}
-	
+
 	protected void execute() {
-		if(controller.getYButtonPressed()) {	//Placeholder, button is not yet decided
-			climber.climb(.5);
-		}
+		climber.climb(controller.getY(Hand.kLeft));
 	}
-	
+
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
