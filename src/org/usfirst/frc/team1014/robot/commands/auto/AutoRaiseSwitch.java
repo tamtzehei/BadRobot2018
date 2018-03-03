@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoRaiseSwitch extends Command {
 
-	private static final double TIME_US = 1000000; // Time value is currently incorrect. Needs to move 13 inches
+	private static final double TIME_US = 1300000; // Time value is currently incorrect. Needs to move 13 inches
 
 	private Lifter lifter;
 	private double startTime_us, currentTime_us;

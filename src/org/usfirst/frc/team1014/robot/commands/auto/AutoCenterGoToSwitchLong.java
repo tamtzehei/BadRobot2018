@@ -20,7 +20,6 @@ public class AutoCenterGoToSwitchLong extends CommandGroup {
 		this.addSequential(new Spin(drivetrain, direction * -49.5));
 		this.addSequential(new DriveStraightDistance(drivetrain, 75)); 
 		this.addSequential(new Spin(drivetrain, direction * 49.5));
-		this.addSequential(new DriveStraightDistance(drivetrain, 25));
 	}
 	
 }

@@ -16,7 +16,7 @@ public class AutoRLSwitch extends CommandGroup{
 	 * @param direction - 1 for right, -1 for left
 	 */
 	public AutoRLSwitch(Drivetrain driveTrain, Lifter lifter, Grabber grabber, int direction) {		//untested
-		this.addSequential(new DriveStraightDistance(driveTrain, 268.75));		//value is definitely not right
+		this.addSequential(new DriveStraightDistance(driveTrain, 140));		//value is definitely not right
 		this.addSequential(new Spin(driveTrain, direction * 90));
 		this.addSequential(new AutoMoveCloseSwitch(driveTrain, lifter, grabber));
 

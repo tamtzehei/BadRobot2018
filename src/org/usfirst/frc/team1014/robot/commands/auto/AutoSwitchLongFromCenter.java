@@ -20,11 +20,5 @@ public class AutoSwitchLongFromCenter extends CommandGroup{
 		this.addSequential(new AutoMoveCloseSwitch(driveTrain, lifter, grabber));
 		this.addSequential(new DriveStraight(driveTrain, -.3, 1));
 		this.addSequential(new AutoRaiseSwitch(lifter, -1));
-		this.addSequential(new Spin(driveTrain, direction * -45));
-		this.addSequential(new DriveStraight(driveTrain, .5, 1));
-		this.addSequential(new Spin(driveTrain, direction * 45));
-		this.addSequential(new DriveStraight(driveTrain, .5, 1));
-
-
 	}
 }

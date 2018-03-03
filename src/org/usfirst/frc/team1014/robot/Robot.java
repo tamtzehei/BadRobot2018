@@ -6,6 +6,7 @@ import org.usfirst.frc.team1014.robot.commands.Autonomous;
 import org.usfirst.frc.team1014.robot.commands.Teleop;
 import org.usfirst.frc.team1014.robot.commands.auto.AutoMode;
 import org.usfirst.frc.team1014.robot.commands.auto.AutoRLScale;
+import org.usfirst.frc.team1014.robot.commands.auto.AutoScaleFromCenter;
 import org.usfirst.frc.team1014.robot.commands.core.DriveStraightDistance;
 import org.usfirst.frc.team1014.robot.subsystems.Climber;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
@@ -96,6 +97,10 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().removeAll();
 
 		driveTrain.resetAHRS();
+		
+		//autoCG.addSequential(new AutoRLSwitch(driveTrain, lifter, grabber, -1));
+		
+//		autoCG.addSequential(new AutoScaleFromCenter(driveTrain, lifter, grabber, 1));
 
 		if (DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R') {
 			autoCG.addSequential(new AutoRLScale(driveTrain, lifter, grabber, 1));
