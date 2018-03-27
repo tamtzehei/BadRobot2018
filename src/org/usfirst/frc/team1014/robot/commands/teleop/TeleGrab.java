@@ -16,7 +16,6 @@ public class TeleGrab extends Command {
 	private Grabber grabber;
 	private Lifter lifter;
 
-	boolean heartbeatState = false, heartbeatDown = false;
 	long startLastGrab = 0;
 
 	boolean autoGrab = false;
@@ -42,42 +41,20 @@ public class TeleGrab extends Command {
 				autoGrab = false;
 				// Auto grab ended
 				autoGrabLiftUntil = System.currentTimeMillis() + AUTO_GRAB_LIFT_TIME;
-				heartbeatState = true;
 			}
 			forceLift = System.currentTimeMillis() - autoGrabLiftUntil < 0;
 
 			if (controller.getTriggerAxis(Hand.kRight) > .3) {
 				// Collect cubes
 				grabber.turnCollect(1);
-				heartbeatState = false;
 			} else if (controller.getBumper(Hand.kRight)) {
 				// release
 				grabber.turnRelease(.6);
-				heartbeatState = false;
 			} else {
-				if (heartbeatState) {
-					grabber.turnCollect(isGrabbing() ? .2 : 0);
-					controller.setRumble(RumbleType.kLeftRumble, isGrabbing() ? 1 : 0);
-					controller.setRumble(RumbleType.kRightRumble, isGrabbing() ? 1 : 0);
-
-				} else {
-					grabber.turnCollect(0);
-					controller.setRumble(RumbleType.kLeftRumble, 0);
-					controller.setRumble(RumbleType.kRightRumble, 0);
-				}
+				grabber.turnCollect(isGrabbing() ? .2 : 0);
+				controller.setRumble(RumbleType.kLeftRumble, isGrabbing() ? 1 : 0);
+				controller.setRumble(RumbleType.kRightRumble, isGrabbing() ? 1 : 0);
 			}
-
-			if (controller.getAButton()) {
-				if (!heartbeatDown) {
-					heartbeatDown = true;
-					heartbeatState = !heartbeatState;
-					startLastGrab = System.currentTimeMillis();
-				}
-			} else {
-				heartbeatDown = false;
-			}
-
-			BadLog.publish("Grabber/Heartbeat", LogUtil.fromBool(heartbeatState));
 
 			{
 				double speed = (controller.getBumper(Hand.kLeft) ? 1 : 0)

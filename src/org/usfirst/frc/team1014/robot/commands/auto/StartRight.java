@@ -20,10 +20,10 @@ public class StartRight extends CommandGroup{
 	public StartRight(Drivetrain driveTrain, Lifter lifter, Grabber grabber, int prohibit, int scaleSide, int switchSide) {
 		
 		if(scaleSide == 1 && prohibit != 2) {
-			this.addSequential(new AutoRLScale(driveTrain, lifter, grabber, 1));
+			this.addSequential(new AutoRLScale(driveTrain, lifter, grabber,scaleSide));
 		} 
 		else if(switchSide == 1 && prohibit != 1) {
-			this.addSequential(new AutoRLSwitch(driveTrain, lifter, grabber, 1));
+			this.addSequential(new AutoRLSwitch(driveTrain, lifter, grabber, switchSide));
 		}
 		else {
 			this.addSequential(new DriveStraightDistance(driveTrain, 100));

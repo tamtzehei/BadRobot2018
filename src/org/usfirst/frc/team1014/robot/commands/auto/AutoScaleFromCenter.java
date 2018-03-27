@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1014.robot.commands.auto;
 
+import org.usfirst.frc.team1014.robot.commands.core.DriveStraight;
 import org.usfirst.frc.team1014.robot.commands.core.DriveStraightDistance;
 import org.usfirst.frc.team1014.robot.commands.core.Spin;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
@@ -16,9 +17,14 @@ public class AutoScaleFromCenter extends CommandGroup{
 	 */
 	public AutoScaleFromCenter(Drivetrain driveTrain, Lifter lifter, Grabber grabber, int direction) {	//untested
 		this.addSequential(new AutoCentertoAB(driveTrain, direction));
-		this.addSequential(new DriveStraightDistance(driveTrain, 120));		//change so approach is from 45 degrees
+		this.addSequential(new DriveStraightDistance(driveTrain, 160));		//change so approach is from 45 degrees
 		this.addSequential(new Spin(driveTrain, direction * 45));
-		this.addSequential(new AutoMoveCloseScale(driveTrain, lifter, grabber));
+		
+		this.addSequential(new AutoRaiseScale(lifter, 1));
+		this.addSequential(new DriveStraight(driveTrain, .3, .4)); 
+		this.addSequential(new AutoRelease(grabber));
+		this.addSequential(new DriveStraight(driveTrain, -.3, 1)); 
+		this.addSequential(new AutoRaiseScale(lifter, -1));
 
 
 	}

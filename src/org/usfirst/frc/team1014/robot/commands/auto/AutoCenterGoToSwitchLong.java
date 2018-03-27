@@ -18,7 +18,7 @@ public class AutoCenterGoToSwitchLong extends CommandGroup {
 	public AutoCenterGoToSwitchLong(Drivetrain drivetrain, int direction) {
 		this.addSequential(new DriveStraightDistance(drivetrain, 25));
 		this.addSequential(new Spin(drivetrain, direction * -49.5));
-		this.addSequential(new DriveStraightDistance(drivetrain, 75)); 
+		this.addSequential(new DriveStraightDistance(drivetrain, 70)); //original 75, almost fell off during match
 		this.addSequential(new Spin(drivetrain, direction * 49.5));
 	}
 	

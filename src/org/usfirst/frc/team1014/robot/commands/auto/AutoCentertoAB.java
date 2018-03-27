@@ -22,7 +22,7 @@ public class AutoCentertoAB extends CommandGroup
 	{
 		this.addSequential(new DriveStraightDistance(drivetrain, 15.5)); 
 		this.addSequential(new Spin(drivetrain, (-60 * direction)));
-		this.addSequential(new DriveStraightDistance(drivetrain, 130)); //140 was too long
+		this.addSequential(new DriveStraightDistance(drivetrain, 120)); //140 was too long
 		this.addSequential(new Spin(drivetrain, (60 * direction)));
 				
 	}
