@@ -16,7 +16,7 @@ public class UseGrabber extends Command {
 
 	boolean grabState = false, grabDown = false;
 	long startLastGrab = 0;
-
+	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
@@ -36,14 +36,16 @@ public class UseGrabber extends Command {
 			grabState = false;
 		} else {
 			if (grabState) {
-				grabber.turnCollect(isGrabbing() ? .2 : 0);
+				grabber.heartBeat(System.currentTimeMillis());
+				
+				/*grabber.turnCollect(isGrabbing() ? .2 : 0);
 				controller.setRumble(RumbleType.kLeftRumble, isGrabbing() ? 1 : 0);
 				controller.setRumble(RumbleType.kRightRumble, isGrabbing() ? 1 : 0);
 
 			} else {
 				grabber.turnCollect(0);
 				controller.setRumble(RumbleType.kLeftRumble, 0);
-				controller.setRumble(RumbleType.kRightRumble, 0);
+				controller.setRumble(RumbleType.kRightRumble, 0);*/
 			}
 		}
 
@@ -60,9 +62,9 @@ public class UseGrabber extends Command {
 		BadLog.publish("Grabber/Heartbeat", LogUtil.fromBool(grabState));
 	}
 
-	private boolean isGrabbing() {
+	/*private boolean isGrabbing() {
 		return (System.currentTimeMillis() - startLastGrab) % 1000 < 250;
-	}
+	}*/
 
 	public UseGrabber(XboxController controller, Grabber grabber) {
 		requires(grabber);

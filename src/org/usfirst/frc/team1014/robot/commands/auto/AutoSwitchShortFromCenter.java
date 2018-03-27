@@ -17,7 +17,7 @@ public class AutoSwitchShortFromCenter extends CommandGroup {
 	 *            - -1 for left, 1 for right
 	 */
 	public AutoSwitchShortFromCenter(Drivetrain driveTrain, Lifter lifter, Grabber grabber, int direction) {
-		this.addSequential(new AutoCentertoAB(driveTrain, direction));
+		this.addSequential(new AutoCenterAB(driveTrain, direction));
 		this.addSequential(new DriveStraightDistance(driveTrain, 20));
 		this.addSequential(new Spin(driveTrain, 90 * direction));
 		this.addSequential(new AutoMoveCloseSwitch(driveTrain, lifter, grabber));

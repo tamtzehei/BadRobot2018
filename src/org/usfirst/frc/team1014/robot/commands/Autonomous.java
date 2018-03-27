@@ -9,6 +9,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Autonomous extends CommandGroup {	
 	public Autonomous(Drivetrain driveTrain, Lifter lifter, Grabber grabber) {
-		
+		this.addSequential(new DriveStraight(driveTrain, .7, .5));
 	}
 }

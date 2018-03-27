@@ -6,7 +6,7 @@ import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutoCentertoAB extends CommandGroup
+public class AutoCenterAB extends CommandGroup
 {
 	
 	double power, half;
@@ -18,7 +18,7 @@ public class AutoCentertoAB extends CommandGroup
 	 * 
 	 * 
 	 */
-	public AutoCentertoAB(Drivetrain drivetrain, int direction)
+	public AutoCenterAB(Drivetrain drivetrain, int direction)
 	{
 		this.addSequential(new DriveStraightDistance(drivetrain, 15.5)); 
 		this.addSequential(new Spin(drivetrain, (40 * direction)));

@@ -1,13 +1,17 @@
 package org.usfirst.frc.team1014.robot.commands;
 
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1014.robot.subsystems.Grabber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveStraightDistance extends Command {
 	private Drivetrain driveTrain;
+	private Grabber grabber;
 	private double seconds;
 	private double speed;
+
+	long startLastGrab = 0;
 
 	long startTime;
 
@@ -27,6 +31,7 @@ public class DriveStraightDistance extends Command {
 		this.seconds = (distance - linRegOffset) / linRegScaler;
 		requires(driveTrain);
 		this.driveTrain = driveTrain;
+		this.grabber = grabber;
 	}
 
 	@Override
@@ -37,7 +42,9 @@ public class DriveStraightDistance extends Command {
 	@Override
 	protected void execute() {
 		driveTrain.driveStraight(speed);
+		grabber.heartBeat(System.currentTimeMillis());
 	}
+	
 
 	@Override
 	protected boolean isFinished() {

@@ -17,9 +17,9 @@ public class AutoScaleFromCenter extends CommandGroup{
 	 * @param direction - -1 for right, 1 for left
 	 */
 	public AutoScaleFromCenter(Drivetrain driveTrain, Lifter lifter, Grabber grabber, int direction) {	//untested
-		this.addSequential(new AutoCentertoAB(driveTrain, direction));
-		this.addSequential(new DriveStraightDistance(driveTrain, 156.25));		//change so approach is from 45 degrees
-		this.addSequential(new Spin(driveTrain, direction * 90));
+		this.addSequential(new AutoCenterAB(driveTrain, direction));
+		this.addSequential(new DriveStraightDistance(driveTrain, 100));		//change so approach is from 45 degrees
+		this.addSequential(new Spin(driveTrain, direction * 45));
 		this.addSequential(new AutoMoveCloseScale(driveTrain, lifter, grabber));
 
 
