@@ -8,11 +8,12 @@ import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TeleGrab extends Command {
-	private XboxController controller;
+	private Joystick controller;
 	private Grabber grabber;
 	private Lifter lifter;
 
@@ -30,7 +31,7 @@ public class TeleGrab extends Command {
 
 	@Override
 	protected void execute() {
-		if (controller.getYButton()) {
+		if (controller.getRawButton(4)) {
 			// Autograb
 			grabber.turnCollect(1);
 			lifter.move(-.8, false);
@@ -44,10 +45,10 @@ public class TeleGrab extends Command {
 			}
 			forceLift = System.currentTimeMillis() - autoGrabLiftUntil < 0;
 
-			if (controller.getTriggerAxis(Hand.kRight) > .3) {
+			if (controller.getRawButton(2)) {
 				// Collect cubes
 				grabber.turnCollect(1);
-			} else if (controller.getBumper(Hand.kRight)) {
+			} else if (controller.getRawButton(1)) {
 				// release
 				grabber.turnRelease(.6);
 			} else {
@@ -57,16 +58,24 @@ public class TeleGrab extends Command {
 			}
 
 			{
-				double speed = (controller.getBumper(Hand.kLeft) ? 1 : 0)
-						- (controller.getTriggerAxis(Hand.kLeft) > .5 ? 1 : 0);
+				double speed = controller.getRawAxis(1);
+				
+				if(Math.abs(speed) < .1)
+					speed = 0;
+				
 				boolean overrideLimits = false;
 
 				if (forceLift) {
 					speed = 1;
 				}
 
-				if (Math.abs(controller.getY(Hand.kRight)) > .05) {
-					speed = -controller.getY(Hand.kRight);
+				int pov;
+				if ((pov = controller.getPOV()) != -1) {
+					if(pov < 90 || pov >= 315) {
+						speed = 1;
+					} else if (pov > 90 && pov < 270) {
+						speed = -1;
+					}
 					overrideLimits = true;
 				}
 
@@ -79,7 +88,7 @@ public class TeleGrab extends Command {
 		return (System.currentTimeMillis() - startLastGrab) % 1000 < 250;
 	}
 
-	public TeleGrab(XboxController controller, Grabber grabber, Lifter lifter) {
+	public TeleGrab(Joystick controller, Grabber grabber, Lifter lifter) {
 		requires(grabber);
 		requires(lifter);
 		this.controller = controller;
