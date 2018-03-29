@@ -15,13 +15,18 @@ public class Lifter extends Subsystem {
 	public Lifter() {
 
 		liftMotor = new TalonSRX(RobotMap.LIFT_1_ID);
-
+		
 		BadLog.createTopic("Lift/Lifter Output Percent", BadLog.UNITLESS, () -> liftMotor.getMotorOutputPercent());
 
 		BadLog.createTopic("Lift/Lifter Current", "A", () -> liftMotor.getOutputCurrent());
 
 		BadLog.createTopic("Lift/Lifter Voltage", "V", () -> liftMotor.getMotorOutputVoltage());
 	}
+	
+	public boolean isAtBottomLimit() {
+		return !liftMotor.getSensorCollection().isRevLimitSwitchClosed();
+	}
+	
 
 	public void move(double speed, boolean overrideLimits) {
 		liftMotor.overrideLimitSwitchesEnable(!overrideLimits);

@@ -17,11 +17,8 @@ public class TeleGrab extends Command {
 	private Grabber grabber;
 	private Lifter lifter;
 
-	long startLastGrab = 0;
-
-	boolean autoGrab = false;
-	private static final int AUTO_GRAB_LIFT_TIME = 450;
-	long autoGrabLiftUntil = 0;
+	private static final int AUTO_GRAB_LIFT_TIME = 300;
+	long autoLiftUntil = 0;
 
 	@Override
 	protected boolean isFinished() {
@@ -31,61 +28,51 @@ public class TeleGrab extends Command {
 
 	@Override
 	protected void execute() {
-		if (controller.getRawButton(4)) {
-			// Autograb
+
+		if (controller.getRawButton(2)) {
+			// Collect cubes
 			grabber.turnCollect(1);
-			lifter.move(-.8, false);
-			autoGrab = true;
+		} else if (controller.getRawButton(1)) {
+			// release
+			grabber.turnRelease(.6);
 		} else {
-			boolean forceLift = false;
-			if (autoGrab) {
-				autoGrab = false;
-				// Auto grab ended
-				autoGrabLiftUntil = System.currentTimeMillis() + AUTO_GRAB_LIFT_TIME;
+			grabber.turnCollect(isGrabbing() ? .2 : 0);
+			controller.setRumble(RumbleType.kLeftRumble, isGrabbing() ? 1 : 0);
+			controller.setRumble(RumbleType.kRightRumble, isGrabbing() ? 1 : 0);
+		}
+
+		{
+			double speed = controller.getRawAxis(1);
+
+			if (Math.abs(speed) < .1)
+				speed = 0;
+			
+			if(lifter.isAtBottomLimit())
+				autoLiftUntil = System.currentTimeMillis() + AUTO_GRAB_LIFT_TIME;
+			
+			boolean overrideLimits = false;
+
+			boolean forceLift = System.currentTimeMillis() - autoLiftUntil < 0;
+			if (forceLift && Math.abs(speed) < 1E-9) {
+				speed = 1;
 			}
-			forceLift = System.currentTimeMillis() - autoGrabLiftUntil < 0;
 
-			if (controller.getRawButton(2)) {
-				// Collect cubes
-				grabber.turnCollect(1);
-			} else if (controller.getRawButton(1)) {
-				// release
-				grabber.turnRelease(.6);
-			} else {
-				grabber.turnCollect(isGrabbing() ? .2 : 0);
-				controller.setRumble(RumbleType.kLeftRumble, isGrabbing() ? 1 : 0);
-				controller.setRumble(RumbleType.kRightRumble, isGrabbing() ? 1 : 0);
-			}
-
-			{
-				double speed = controller.getRawAxis(1);
-				
-				if(Math.abs(speed) < .1)
-					speed = 0;
-				
-				boolean overrideLimits = false;
-
-				if (forceLift) {
+			int pov;
+			if ((pov = controller.getPOV()) != -1) {
+				if (pov < 90 || pov >= 315) {
 					speed = 1;
+				} else if (pov > 90 && pov < 270) {
+					speed = -1;
 				}
-
-				int pov;
-				if ((pov = controller.getPOV()) != -1) {
-					if(pov < 90 || pov >= 315) {
-						speed = 1;
-					} else if (pov > 90 && pov < 270) {
-						speed = -1;
-					}
-					overrideLimits = true;
-				}
-
-				lifter.move(speed, overrideLimits);
+				overrideLimits = true;
 			}
+
+			lifter.move(speed, overrideLimits);
 		}
 	}
 
 	private boolean isGrabbing() {
-		return (System.currentTimeMillis() - startLastGrab) % 1000 < 250;
+		return (System.currentTimeMillis()) % 1000 < 250;
 	}
 
 	public TeleGrab(Joystick controller, Grabber grabber, Lifter lifter) {
