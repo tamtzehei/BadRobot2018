@@ -7,6 +7,7 @@ import badlog.lib.BadLog;
 import badlog.lib.DataInferMode;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,7 +20,7 @@ public class TeleDrive extends Command {
 	private XboxController controller;
 	private Drivetrain driveTrain;
 	double targetAngle;
-	private XboxController controller1;
+	private Joystick controller1;
 
 	double slowedSpeedLeft, slowedSpeedRight, slowedSpeedStraight;
 	private static final double SLOWED_SPEED_RATIO = 1d / 3d;
@@ -27,7 +28,7 @@ public class TeleDrive extends Command {
 
 	private boolean driveStraightOn;
 
-	public TeleDrive(Drivetrain driveTrain, XboxController controller0, XboxController controller1) {
+	public TeleDrive(Drivetrain driveTrain, XboxController controller0, Joystick controller1) {
 		this.driveTrain = driveTrain;
 		this.controller = controller0;
 		this.controller1 = controller1;
@@ -72,7 +73,7 @@ public class TeleDrive extends Command {
 			}
 			double speed = drive_straight_force * (invert ? -1 : 1);
 
-			if (controller1.getBButton()) {
+			if (controller1.getRawButton(3)) {
 				speed *= SLOWED_SPEED_RATIO;
 
 				double speed_delta = speed - slowedSpeedStraight;
@@ -99,7 +100,7 @@ public class TeleDrive extends Command {
 				right = -tmp;
 			}
 
-			if (controller1.getBButton()) {
+			if (controller1.getRawButton(3)) {
 				left *= SLOWED_SPEED_RATIO;
 				right *= SLOWED_SPEED_RATIO;
 
