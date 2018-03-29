@@ -13,7 +13,7 @@ public class AutoDelay extends Command{
 	 * 
 	 * @param time - in seconds
 	 */
-	public AutoDelay(int time) {
+	public AutoDelay(double time) {
 		this.time_us = time * 1000000;
 	}
 

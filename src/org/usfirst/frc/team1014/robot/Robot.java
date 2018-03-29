@@ -4,14 +4,13 @@ import java.util.Optional;
 
 import org.usfirst.frc.team1014.robot.commands.Autonomous;
 import org.usfirst.frc.team1014.robot.commands.Teleop;
+import org.usfirst.frc.team1014.robot.commands.auto.AutoDelay;
 import org.usfirst.frc.team1014.robot.commands.auto.AutoMode;
-import org.usfirst.frc.team1014.robot.commands.auto.AutoRLScale;
 import org.usfirst.frc.team1014.robot.commands.auto.Prohibit;
 import org.usfirst.frc.team1014.robot.commands.auto.StartCenterScale;
 import org.usfirst.frc.team1014.robot.commands.auto.StartCenterSwitch;
 import org.usfirst.frc.team1014.robot.commands.auto.StartLeft;
 import org.usfirst.frc.team1014.robot.commands.auto.StartRight;
-import org.usfirst.frc.team1014.robot.commands.core.DriveStraightDistance;
 import org.usfirst.frc.team1014.robot.subsystems.Climber;
 import org.usfirst.frc.team1014.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1014.robot.subsystems.Grabber;
@@ -120,7 +119,7 @@ public class Robot extends TimedRobot {
 			prohibitChooser.addObject("No switch", Prohibit.NO_SWITCH);
 			prohibitChooser.addObject("No Scale", Prohibit.NO_SCALE);
 
-			// SmartDashboard.putNumber("Delay", 0);
+			SmartDashboard.putNumber("Delay", 0);
 			SmartDashboard.putData("Prohibit Chooser", prohibitChooser);
 			SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 
@@ -137,7 +136,9 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().removeAll();
 
 		driveTrain.resetAHRS();
-
+		
+		autoCG.addSequential(new AutoDelay(SmartDashboard.getNumber("Delay", 0)));
+		
 		switch ((AutoMode) autoChooser.getSelected()) {
 
 		case CENTER_SCALE:
