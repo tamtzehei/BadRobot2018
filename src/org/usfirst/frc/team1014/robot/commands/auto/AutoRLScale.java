@@ -17,7 +17,7 @@ public class AutoRLScale extends CommandGroup{
 	 */
 	public AutoRLScale(Drivetrain driveTrain, Lifter lifter, Grabber grabber, int direction) {	//tested
 		this.addSequential(new AutoRaiseDrop(lifter, direction));
-		this.addSequential(new DriveStraightDistance(driveTrain, 252));
+		this.addSequential(new DriveStraightDistance(driveTrain, 240));
 		this.addSequential(new Spin(driveTrain, direction * 45));
 		this.addSequential(new AutoMoveCloseScale(driveTrain, lifter, grabber));
 	}
