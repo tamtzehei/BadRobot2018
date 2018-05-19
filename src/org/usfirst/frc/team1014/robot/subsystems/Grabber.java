@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Grabber extends Subsystem {
 
 	TalonSRX rightWheel, leftWheel;
+	long startLastGrab;
 
 	public Grabber() {
 		rightWheel = new TalonSRX(RobotMap.GRABBER_RIGHT_1_ID);
@@ -41,6 +42,15 @@ public class Grabber extends Subsystem {
 	public void turnCollect(double wheelSpeed) {
 		leftWheel.set(ControlMode.PercentOutput, -wheelSpeed);
 		rightWheel.set(ControlMode.PercentOutput, wheelSpeed);
+	}
+
+	public void heartBeat(long time) {
+		long remainder = (time - startLastGrab) % 1000;
+		if(remainder > 250) {
+			turnRelease(.2);
+			startLastGrab = time;
+		}else
+			turnRelease(0);
 	}
 
 	@Override

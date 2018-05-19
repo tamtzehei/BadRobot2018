@@ -27,6 +27,7 @@ public class AutoScaleFromCenter extends CommandGroup{
 		this.addSequential(new AutoRaiseScale(lifter, -1));
 
 
+
 	}
 	
 }
